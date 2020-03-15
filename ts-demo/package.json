@@ -1,0 +1,12 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc ts-base.ts && node ts-base.js",
+    "dec": "tsc --target ES5 --experimentalDecorators decorator.ts && node decorator.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
