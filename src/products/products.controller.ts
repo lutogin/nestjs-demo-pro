@@ -15,9 +15,12 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { HttpStatus } from '@nestjs/common';
+import { ProductsService } from './products.service';
 
 @Controller('products')
 export class ProductsController {
+  constructor(private productsService: ProductsService) {};
+
   @Get('/docs/')
   @Redirect('https://docs.nestjs.com/')
   getDocks(
@@ -28,14 +31,13 @@ export class ProductsController {
   }
 
   @Post()
-  @HttpCode(HttpStatus.CREATED)
   create(
     @Req()
-      req: Request,
+    req: Request,
     @Res()
-      res: Response,
+    res: Response
   ): any {
-    return res.json({ msg: 'Create endpoint.' });
+    return res.send(this.productsService.create({ name: '', quantity: 2, price: '' }));
   }
 
   @Get(':id')
@@ -49,7 +51,7 @@ export class ProductsController {
     @Body()
     data
   ): any {
-    return res.send({msg: `Get by id endpoint for ID = ${data.id}).` });
+    return res.send({msg: `Get by id endpoint for ID = ${data.id}.` });
   }
 
   @Get()
