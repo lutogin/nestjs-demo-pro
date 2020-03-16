@@ -16,6 +16,8 @@ import {
 import { Request, Response } from 'express';
 import { HttpStatus } from '@nestjs/common';
 import { ProductsService } from './products.service';
+import { CreateProductDTO } from './dto/create-product.dto';
+import { Product } from './interfaces/product.interface';
 
 @Controller('products')
 export class ProductsController {
@@ -31,38 +33,48 @@ export class ProductsController {
   }
 
   @Post()
-  create(
-    @Req()
-    req: Request,
-    @Res()
-    res: Response
-  ): any {
-    return res.send(this.productsService.create({ name: '', quantity: 2, price: '' }));
-  }
-
-  @Get(':id')
-  getById(
-    @Req()
-    req: Request,
-    @Res()
-    res: Response,
-    @Param()
-    @Query()
-    @Body()
-    data
-  ): any {
-    return res.send({msg: `Get by id endpoint for ID = ${data.id}.` });
+  async create(@Body() product: CreateProductDTO): Promise<Product[]> {
+    return await this.productsService.create(product);
   }
 
   @Get()
-  findAll(
-    @Req()
-      req: Request,
-    @Res()
-      res: Response,
-  ): any {
-    return res.send({ msg: 'Find all.' });
+  async findAll(): Promise<Product[]> {
+    return await this.productsService.getAll();
   }
+
+  @Get(':id')
+  async getOne(@Param() params): Promise<Product> {
+    return await this.productsService.getOne(params.id);
+  }
+
+  @Delete(':id')
+  async delete(@Param() params): Promise<Product> {
+    return await this.productsService.delete(params.id);
+  }
+
+  // @Get(':id')
+  // getById(
+  //   @Req()
+  //   req: Request,
+  //   @Res()
+  //   res: Response,
+  //   @Param()
+  //   @Query()
+  //   @Body()
+  //   data
+  // ): any {
+  //   return res.send({msg: `Get by id endpoint for ID = ${data.id}.` });
+  // }
+
+  // @Get()
+  // findAll(
+  //   @Req()
+  //     req: Request,
+  //   @Res()
+  //     res: Response,
+  // ): any {
+  //   return res.send({ msg: 'Find all.' });
+  // }
 
   @Put(':id')
   update(
@@ -76,17 +88,17 @@ export class ProductsController {
     return res.send({ msg: `Update endpoint for ${param.id}.` })
   }
 
-  @Delete(':id')
-  delete(
-    @Req()
-    req: Request,
-    @Res()
-    res: Response,
-    @Param()
-    @Query()
-    @Body()
-      data
-  ): any {
-    return res.send({ msg: `Delete endpoint for ${data.id}.` })
-  }
+  // @Delete(':id')
+  // delete(
+  //   @Req()
+  //   req: Request,
+  //   @Res()
+  //   res: Response,
+  //   @Param()
+  //   @Query()
+  //   @Body()
+  //     data
+  // ): any {
+  //   return res.send({ msg: `Delete endpoint for ${data.id}.` })
+  // }
 }
