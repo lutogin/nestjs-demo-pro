@@ -8,7 +8,7 @@ export class ProductsService {
   // DB create logic
   async create(product) {
     this.products.push(product);
-    return this.products;
+    return this.products[this.products.length-1];
   }
 
   async getAll(): Promise<Product[]> {
