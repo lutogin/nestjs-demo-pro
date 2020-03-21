@@ -12,14 +12,19 @@ import {
   HttpCode,
   Header,
   Redirect,
+  UseFilters, NotFoundException, UseInterceptors,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { HttpStatus } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { Product } from './interfaces/product.interface';
+import { HttpExceptionFilter } from '../common/filters/http-exception.filter';
+import { TransformInterceptor } from '../common/interseptors/transform.interceptor';
 
 @Controller('products')
+@UseFilters(HttpExceptionFilter)
+@UseInterceptors(TransformInterceptor)
 export class ProductsController {
   constructor(private productsService: ProductsService) {};
 
@@ -49,7 +54,8 @@ export class ProductsController {
 
   @Delete(':id')
   async delete(@Param() params): Promise<Product> {
-    return await this.productsService.delete(params.id);
+    throw new NotFoundException('Something wrong');
+    // return await this.productsService.delete(params.id);
   }
 
   // @Get(':id')
