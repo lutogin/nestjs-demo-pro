@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  nest-app:
+    container_name: "nest-js-pro"
+    build: .
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    env_file: .env
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=dev
+      - DB_PW=1123
+      - DB_NAME=nest-db
+    volumes:
+      - .:/home/app
+      - /home/app/node_modules
+
+  postgres:
+    image: postgres:12.0-alpine
+    container_name: "nest-postgres"
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgresdb:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: 1123
+      POSTGRES_DB: nest-db
+    restart: unless-stopped
+
+volumes:
+  postgresdb:
+
