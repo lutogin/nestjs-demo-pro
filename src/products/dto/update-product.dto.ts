@@ -6,21 +6,21 @@ import {
   IsOptional,
 } from 'class-validator';
 
-export class CreateProductDTO {
-  @IsNotEmpty()
+export class UpdateProductDto {
+  @IsOptional()
   @IsString()
   readonly name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   readonly quantity: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   readonly price: number;
 
   // Property od product-details
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   readonly partNumber: string;
 

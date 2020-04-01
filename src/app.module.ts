@@ -24,8 +24,8 @@ import { Connection } from 'typeorm';
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private readonly conncetion: Connection) {
-    console.log('Connection to DB:', conncetion.isConnected);
+  constructor(private readonly connection: Connection) {
+    console.log('Connection to DB:', connection.isConnected);
   }
 
   // configure(consumer: MiddlewareConsumer) {

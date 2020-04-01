@@ -3,7 +3,7 @@ EXPOSE 3000
 
 WORKDIR /home/app
 
-COPY ./ /home/app
+COPY . /home/app
 
 RUN yarn install
 
