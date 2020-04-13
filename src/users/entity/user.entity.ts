@@ -3,7 +3,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
+  OneToMany, JoinTable,
 } from 'typeorm';
 import { PhotoEntity } from '../../photos/entity/photo.entity';
 
@@ -20,10 +20,11 @@ export class UserEntity {
 
   @OneToMany(
     type => PhotoEntity,
-    PhotoEntity => PhotoEntity.user,
+    photoEntity => photoEntity.user,
     {
       cascade: ['insert', 'update'],
       onDelete: 'CASCADE'
     })
+  @JoinTable()
   photos: PhotoEntity[]
 }

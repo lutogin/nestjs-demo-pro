@@ -4,7 +4,7 @@ import {
   IsOptional,
   IsArray,
 } from 'class-validator';
-import { UpdatePhotoDto } from '../../photos/dto/update-photo.dto';
+// import { UpdatePhotoDto } from '../../photos/dto/update-photo.dto';
 
 export class UpdateUserDto {
   @IsOptional()
@@ -16,7 +16,7 @@ export class UpdateUserDto {
   @IsString()
   readonly password: string;
 
-  @IsOptional()
-  @IsArray()
-  photos: UpdatePhotoDto[]
+  // @IsOptional()
+  // @IsArray()
+  // photos: UpdatePhotoDto[]
 }

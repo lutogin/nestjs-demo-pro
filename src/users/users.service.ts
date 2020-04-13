@@ -13,8 +13,8 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private readonly usersRepository: Repository<UserEntity>,
 
-    // @InjectRepository(PhotoEntity)
-    // private readonly photosRepository: Repository<PhotoEntity>,
+    @InjectRepository(PhotoEntity)
+    private readonly photosRepository: Repository<PhotoEntity>,
   ) {}
 
   BASE_RELATIONS = ['photos'];

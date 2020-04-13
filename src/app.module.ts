@@ -5,6 +5,9 @@ import { ProductsModule } from './products/products.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
+import { UsersModule } from './users/users.module';
+import { PhotosModule } from './photos/photos.module';
+import { QuizModule } from './quiz/quiz.module';
 
 @Module({
   imports: [
@@ -18,7 +21,10 @@ import { Connection } from 'typeorm';
       database: process.env.DB_NAME,
       entities: [`${__dirname}/**/*.entity{.ts,.js}`],
       synchronize: true, // DEV only, do not use on PROD!
-    })
+    }),
+    UsersModule,
+    PhotosModule,
+    QuizModule
   ],
   controllers: [AppController],
   providers: [AppService],
